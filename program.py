@@ -1,27 +1,27 @@
-def x1(t_list, t_name, t_due):
-    t = {'n': t_name, 'd': t_due, 'c': False}
-    t_list.append(t)
+def create_task(task_list, task_name, task_due):
+    t = {'name': task_name, 'date': task_due, 'completed': False}
+    task_list.append(t)
 
-def x2(t_list, t_name):
-    return [t for t in t_list if t['n'] != t_name]
+def filter_tasks(task_list, task_name):
+    return [t for t in task_list if t['name'] != task_name]
 
-def x3(t_list):
+def print_tasks(task_list):
     print("All Tasks:")
-    for t in t_list:
-        print(f"Task: {t['n']}, Due: {t['d']}, Completed: {t['c']}")
+    for t in task_list:
+        print(f"Task: {t['name']}, Due: {t['date']}, Completed: {t['completed']}")
 
-def x4(t_list, t_name):
+def complete_tasks(task_list, task_name):
     try:
-        t_index = next(i for i, t in enumerate(t_list) if t['n'] == t_name)
-        t_list[t_index]['c'] = True
+        task_index = next(i for i, t in enumerate(task_list) if t['name'] == task_name)
+        task_list[task_index]['completed'] = True
     except StopIteration:
         print("Task not found.")
 
-t_list = []
+task_list = []
 
-x1(t_list, "Fix bug in code", "2024-02-21")
-x1(t_list, "Update documentation", "2024-02-22")
-x3(t_list)
-x4(t_list, "Fix bug in code")
-t_list = x2(t_list, "Update documentation")  
-x3(t_list)
+create_task(task_list, "Fix bug in code", "2024-02-21")
+create_task(task_list, "Update documentation", "2024-02-22")
+print_tasks(task_list)
+complete_tasks(task_list, "Fix bug in code")
+task_list = filter_tasks(task_list, "Update documentation")  
+print_tasks(task_list)
